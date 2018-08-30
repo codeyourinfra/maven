@@ -1,0 +1,13 @@
+---
+- hosts: containers
+  gather_facts: no
+  roles:
+    - maven
+  tasks:
+    - name: Get Maven version
+      shell: mvn -version
+      register: maven_version_result
+    - name: Assert Maven version
+      assert:
+        that: maven_version_result.stdout_lines[0] | regex_search('^Apache Maven [\d.]+') != ''
+        msg: "Failure on Maven installation"
