@@ -9,5 +9,5 @@
       register: maven_version_result
     - name: Assert Maven version
       assert:
-        that: maven_version_result.stdout_lines[0] | regex_search('^Apache Maven [\d.]+') != ''
+        that: maven_version_result.stdout_lines[0] | regex_search('^Apache Maven ' + maven_version) != ''
         msg: "Failure on Maven installation"
