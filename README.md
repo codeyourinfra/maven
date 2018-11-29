@@ -1,6 +1,6 @@
 # maven
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![GitHub release](https://img.shields.io/github/release/codeyourinfra/maven.svg)]() [![Build status](https://travis-ci.org/codeyourinfra/maven.svg?branch=master)](https://travis-ci.org/codeyourinfra/maven)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![GitHub release](https://img.shields.io/github/release/codeyourinfra/maven.svg)](https://github.com/codeyourinfra/maven/releases/latest) [![Build status](https://travis-ci.org/codeyourinfra/maven.svg?branch=master)](https://travis-ci.org/codeyourinfra/maven) [![Ansible Role](https://img.shields.io/ansible/role/29234.svg)](https://galaxy.ansible.com/codeyourinfra/maven) [![Ansible Role downloads](https://img.shields.io/ansible/role/d/29234.svg)](https://galaxy.ansible.com/codeyourinfra/maven)
 
 Ansible role to install [Apache Maven](https://maven.apache.org).
 
