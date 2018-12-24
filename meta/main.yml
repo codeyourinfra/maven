@@ -14,7 +14,7 @@ galaxy_info:
 
   galaxy_tags:
     - maven
-  
+
 dependencies:
   - role: codeyourinfra.oracle_java8
     version: v1.0
