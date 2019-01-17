@@ -1,7 +1,10 @@
 ---
+- name: Install unzip
+  apt:
+    name: unzip
 - name: Download Maven
   unarchive:
-    src: "https://archive.apache.org/dist/maven/maven-3/{{ maven_version }}/binaries/apache-maven-{{ maven_version }}-bin.tar.gz"
+    src: "https://archive.apache.org/dist/maven/maven-3/{{ maven_version }}/binaries/apache-maven-{{ maven_version }}-bin.zip"
     dest: /opt
     remote_src: yes
 - name: Create Maven link
