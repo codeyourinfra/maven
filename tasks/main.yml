@@ -1,14 +1,46 @@
 ---
-- name: Install unzip
-  apt:
-    name: unzip
-- name: Download Maven
-  unarchive:
-    src: "https://archive.apache.org/dist/maven/maven-3/{{ maven_version }}/binaries/apache-maven-{{ maven_version }}-bin.zip"
-    dest: /opt
-    remote_src: yes
-- name: Create Maven link
-  alternatives:
-    name: maven
-    link: /usr/bin/mvn
-    path: "/opt/apache-maven-{{ maven_version }}/bin/mvn"
+- block:
+
+    - name: Install curl
+      apt:
+        name: curl
+
+    - name: Find out what is the latest Maven version
+      shell: curl -s https://archive.apache.org/dist/maven/maven-3/ | grep -Eo "([0-9]{1,}\.)+[0-9]{1,}" | tail -1 | tee /tmp/latest_maven_version.txt
+      args:
+        warn: False
+        creates: /tmp/latest_maven_version.txt
+      register: latest_maven_version_finder
+      when: use_latest_version
+
+    - name: Set the Maven version to install
+      set_fact:
+        maven_version_to_install: "{{ latest_maven_version_finder.stdout
+          if latest_maven_version_finder.changed and latest_maven_version_finder.rc == 0
+          else (maven_version | default(omit)) }}"
+
+  run_once: True
+
+- block:
+
+    - name: Install unzip
+      apt:
+        name: unzip
+
+    - debug:
+        msg: "Maven version to install: {{ maven_version_to_install }}"
+      run_once: True
+
+    - name: Download Maven
+      unarchive:
+        src: "https://archive.apache.org/dist/maven/maven-3/{{ maven_version_to_install }}/binaries/apache-maven-{{ maven_version_to_install }}-bin.zip"
+        dest: /opt
+        remote_src: true
+
+    - name: Create Maven link
+      alternatives:
+        name: maven
+        link: /usr/bin/mvn
+        path: "/opt/apache-maven-{{ maven_version_to_install }}/bin/mvn"
+
+  when: maven_version_to_install is defined

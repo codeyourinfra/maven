@@ -1,1 +1,4 @@
-maven_version: 3.6.0
+use_latest_version: True
+
+# ignored if use_latest_version
+maven_version: 3.6.1

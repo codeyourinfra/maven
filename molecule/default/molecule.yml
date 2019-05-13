@@ -16,6 +16,10 @@ provisioner:
   name: ansible
   lint:
     name: ansible-lint
+    # ignore temporarily "[306] Shells that use pipes should set the pipefail option"
+    # as a workaround of the issue https://github.com/ansible/ansible-lint/issues/497
+    options:
+      x: ["306"]
 scenario:
   name: default
 verifier:
