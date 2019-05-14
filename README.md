@@ -13,6 +13,18 @@ Ansible role to install [Apache Maven](https://maven.apache.org).
     - codeyourinfra.maven
 ```
 
+The default role behavior is to install the **latest** Maven version. If you want to install a specific version, like the **3.6.0**, please set the variables as shown below:
+
+```yml
+---
+- hosts: servers
+  roles:
+    - role: codeyourinfra.maven
+      vars:
+        use_latest_version: False
+        maven_version: 3.6.0
+```
+
 ## Dependencies
 
 The role is dependent of [Codeyourinfra's Java 8 Ansible role](https://github.com/codeyourinfra/oracle_java8/tree/v1.0), once we need Java to run Maven. Java is so installed before the Maven installation.
